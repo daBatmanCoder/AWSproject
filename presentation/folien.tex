@@ -1,0 +1,115 @@
+%% Begin slides template file
+\documentclass[11pt,t,usepdftitle=false,aspectratio=169]{beamer}
+%% ------------------------------------------------------------------
+%% - aspectratio=43: Set paper aspect ratio to 4:3.
+%% - aspectratio=169: Set paper aspect ratio to 16:9.
+%% ------------------------------------------------------------------
+
+\usetheme[nototalframenumber,foot,logo]{uibk}
+
+
+
+\usepackage[font=scriptsize]{caption}
+%\usepackage[ngerman]{babel} %anführungszeichen \glqq \grqq
+\usepackage{setspace}
+\usepackage{graphicx}
+
+\title[Project Presentation]{Project Presentation - Group 1}
+\subtitle{Distributed Systems}
+
+\author{Lukas Ringer-Widmoser, Benedikt Westreicher, Jonathan Kandel}
+
+\setbeamerfont{frametitle}{size=\small}
+\footertext{Project Presentation - Lukas Ringer-Widmoser, Benedikt Westreicher, Jonathan Kandel}
+\date{20.1.2022}
+
+\headerimage{1}
+
+\begin{document}
+
+
+%% this sets the first PDF bookmark and triggers generation of the title page
+\section{Bookmark Title}
+
+%% this just generates PDF bookmarks
+%\subsection{Overview}
+
+%% first slide
+\begin{frame}
+\frametitle{Overview}
+
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Makespan and cost comparison by region and memory}
+
+	\hfill\vline\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\textbf{{\small Function makespans in s}\vspace{1mm}}\\
+	\includegraphics{./images/function_lifespans.png}
+	\end{minipage}
+	\hfill\vline\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\textbf{{\small Function costs in \$}\vspace{1mm}}\\
+	\includegraphics{./images/function_cost.png}
+	\end{minipage}\\
+\vspace{2mm}
+	\hfill\vline\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\textbf{{\small Average runtime in s}\vspace{1mm}}\\
+	\scalebox{1}[0.85]{\includegraphics{./images/average_runtime.png}}
+	\end{minipage}
+	\hfill\vline\hfill
+	\begin{minipage}[t]{0.48\textwidth}
+		\textbf{{\small Average cost in \$}\vspace{1mm}}\\
+		\includegraphics{./images/average_cost.png}
+	\end{minipage}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Comparison of S3 and ElastiCache}
+	{\footnotesize \begin{itemize}
+		\item Scenario: 30 users per day (each 5x1.2MB images, 5 collages), for 1 month.
+		\item The usage of Lambda for the given scenario were under the free tier limits.
+		\item The only relevant cost for S3 was Replication. Replication is done hourly.
+		\item The only relevant cost for ElastiCache were for the nodes.
+	\end{itemize}}
+
+	{\normalsize Cost comparison}\vspace{1mm}\\
+	\hfill\vline\hfill
+	\begin{minipage}{0.48\textwidth}
+		\textbf{{\small S3}\vspace{1mm}}\\
+		\footnotesize
+		The total cost for S3 came up to 19.7945\$.
+	\end{minipage}
+\hfill\vline\hfill
+	\begin{minipage}{0.48\textwidth}
+		\textbf{{\small ElastiCache}\vspace{1mm}}\\
+		\footnotesize
+		The cost for ElastiCache was much higher at 110.16\$.
+	\end{minipage}\vspace{2mm}\\
+	{\normalsize Fault Tolerance comparison}\vspace{1mm}\\
+	\hfill\vline\hfill
+	\begin{minipage}{0.48\textwidth}
+		\textbf{{\small S3}\vspace{1mm}}\\
+		\footnotesize
+		S3 has a higher resilience against unintended user actions and application failures with e.g. Versioning and Object Lock.
+	\end{minipage}
+\hfill\vline\hfill
+	\begin{minipage}{0.48\textwidth}
+		\textbf{{\small ElastiCache}\vspace{1mm}}\\
+		\footnotesize
+		ElastiCache can handle network outages and node failures very well due to Multi-AZ and node redundancy.
+	\end{minipage}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Main challenges faced}
+	
+\end{frame}
+
+\end{document}
+

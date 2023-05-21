@@ -1,0 +1,124 @@
+---
+name: "CollageGenerator"
+dataIns:
+- name: "bucket"
+  type: "string"
+  source: "bucket"
+- name: "emotions"
+  type: "collection"
+  source: "emotions"
+- name: "minConfidence"
+  type: "number"
+  source: "minConfidence"
+- name: "folder"
+  type: "string"
+  source: "folder"
+workflowBody:
+- function:
+    name: "load_filenames"
+    type: "filenames"
+    dataIns:
+    - name: "bucket"
+      type: "string"
+      source: "CollageGenerator/bucket"
+    - name: "folder"
+      type: "string"
+      source: "CollageGenerator/folder"
+    dataOuts:
+    - name: "images"
+      type: "collection"
+- parallelFor:
+    name: "get_picture_analysis"
+    dataIns:
+    - name: "image_iterator"
+      type: "collection"
+      source: "load_filenames/images"
+    iterators: ["image_iterator"]
+    loopBody:
+    - function:
+        name: "analyse_picture"
+        type: "picture_analysis"
+        dataIns:
+        - name: "image"
+          type: "collection"
+          source: "get_picture_analysis/image_iterator"
+        - name: "bucket"
+          type: "string"
+          source: "CollageGenerator/bucket"
+        dataOuts:
+        - name: "analysis"
+          type: "collection"
+    dataOuts:
+    - name: "analyses"
+      type: "collection"
+      source: "analyse_picture/analysis"
+- parallelFor:
+    name: "crop_pictures"
+    dataIns:
+    - name: "analysis_iterator"
+      type: "collection"
+      source: "get_picture_analysis/analyses"
+    iterators: ["analysis_iterator"]
+    loopBody:
+    - function:
+        name: "crop_picture"
+        type: "cropped_picture"
+        dataIns:
+        - name: "analysis"
+          type: "collection"
+          source: "crop_pictures/analysis_iterator"
+        - name: "bucket"
+          type: "string"
+          source: "CollageGenerator/bucket"
+        dataOuts:
+        - name: "files"
+          type: "collection"
+    dataOuts:
+    - name: "pictureFileGroups"
+      type: "collection"
+      source: "crop_picture/files"
+- function:
+    name: "group_pictures"
+    type: "picture_groups"
+    dataIns:
+    - name: "pictureFileGroups"
+      type: "collection"
+      source: "crop_pictures/pictureFileGroups"
+    - name: "emotions"
+      type: "collection"
+      source: "CollageGenerator/emotions"
+    - name: "minConfidence"
+      type: "number"
+      source: "CollageGenerator/minConfidence"
+    dataOuts:
+    - name: "groups"
+      type: "collection"
+- parallelFor:
+    name: "create_collages"
+    dataIns:
+    - name: "groups"
+      type: "collection"
+      source: "group_pictures/groups"
+    iterators: ["groups"]
+    loopBody:
+    - function:
+        name: "create_collage"
+        type: "collage"
+        dataIns:
+        - name: "bucket"
+          type: "string"
+          source: "CollageGenerator/bucket"
+        - name: "group"
+          type: "collection"
+          source: "create_collages/groups"
+        dataOuts:
+        - name: "collage"
+          type: "string"
+    dataOuts:
+    - name: "collages"
+      type: "collection"
+      source: "create_collage/collage"
+dataOuts:
+- name: "collages"
+  type: "collection"
+  source: "create_collages/collages"

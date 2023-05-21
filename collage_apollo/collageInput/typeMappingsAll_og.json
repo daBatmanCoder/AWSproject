@@ -1,0 +1,57 @@
+[
+    {
+        "functionType": "picture_analysis",
+        "resources": [
+            {
+                "type": "Serverless",
+                "properties": {
+                    "Uri": "https://menvzeryb4e4rfr3htlo7fjf2e0btfqt.lambda-url.us-west-2.on.aws/"
+                }
+            }
+        ]
+    },
+    {
+        "functionType": "filenames",
+        "resources": [
+            {
+                "type": "Serverless",
+                "properties": {
+                    "Uri": "https://of2vu3uupakazn7bw5wi3mvw5e0feqlh.lambda-url.us-west-2.on.aws/"
+                }
+            }
+        ]
+    },
+    {
+        "functionType": "collage",
+        "resources": [
+            {
+                "type": "Serverless",
+                "properties": {
+                    "Uri": "https://uepmvywj7vu7am3ifzfjcv6yw40cgqdu.lambda-url.us-west-2.on.aws/"
+                }
+            }
+        ]
+    },
+    {
+        "functionType": "picture_groups",
+        "resources": [
+            {
+                "type": "Serverless",
+                "properties": {
+                    "Uri": "https://qqeggxwuykyu55qnq5j6kuy6h40jgsyo.lambda-url.us-west-2.on.aws/"
+                }
+            }
+        ]
+    },
+    {
+        "functionType": "cropped_picture",
+        "resources": [
+            {
+                "type": "Serverless",
+                "properties": {
+                    "Uri": "https://borlu6xgnnfq3rz3uumey4qdsy0tcfbb.lambda-url.us-west-2.on.aws/"
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,6 @@
+{
+    "bucket": "face-recognition-g1",
+    "folder": "images/",
+    "emotions": ["HAPPY", "SAD" , "ANGRY" , "CONFUSED" , "DISGUSTED" , "SURPRISED" , "CALM" , "UNKNOWN" , "FEAR"],
+    "minConfidence": 98.0
+}
